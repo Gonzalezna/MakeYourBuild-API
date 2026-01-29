@@ -12,9 +12,25 @@ public class MakeYourBuildApiApplication {
 		System.out.println("==========================================");
 		System.out.println("DIAGNOSTIC: Environment Variables (BEFORE Spring Boot)");
 		System.out.println("==========================================");
-		System.out.println("DATABASE_URL: " + System.getenv("DATABASE_URL"));
-		System.out.println("DB_USERNAME: " + System.getenv("DB_USERNAME"));
-		System.out.println("DB_PASSWORD: " + (System.getenv("DB_PASSWORD") != null ? "***SET***" : "NOT_SET"));
+		String dbUrl = System.getenv("DATABASE_URL");
+		String dbUsername = System.getenv("DB_USERNAME");
+		String dbPassword = System.getenv("DB_PASSWORD");
+		
+		System.out.println("DATABASE_URL: " + dbUrl);
+		System.out.println("DB_USERNAME: " + (dbUsername != null ? dbUsername : "NULL/EMPTY"));
+		System.out.println("DB_PASSWORD: " + (dbPassword != null ? "***SET***" : "NOT_SET"));
+		
+		// Verificar si las variables están vacías o tienen espacios
+		if (dbUrl != null) {
+			System.out.println("DATABASE_URL length: " + dbUrl.length());
+			System.out.println("DATABASE_URL starts with jdbc: " + dbUrl.startsWith("jdbc:"));
+		}
+		if (dbUsername != null) {
+			System.out.println("DB_USERNAME length: " + dbUsername.length());
+			System.out.println("DB_USERNAME value: " + dbUsername);
+		} else {
+			System.out.println("DB_USERNAME is NULL - Esta es la causa del problema!");
+		}
 		System.out.println("CORS_ORIGINS: " + System.getenv("CORS_ORIGINS"));
 		System.out.println("DDL_AUTO: " + System.getenv("DDL_AUTO"));
 		System.out.println("PORT: " + System.getenv("PORT"));
