@@ -22,11 +22,18 @@ spring.datasource.password=TU_CONTRASEÑA
 spring.datasource.driver-class-name=org.postgresql.Driver
 
 # JPA/Hibernate
+# En desarrollo: update (crea/modifica tablas automáticamente)
+# En producción: validate (solo valida, no modifica esquema)
 spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
+spring.jpa.show-sql=false
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.format_sql=false
 
 # Logging
-logging.level.com.makeyourbuild.api=DEBUG
-logging.level.org.springframework.security=DEBUG
+# En desarrollo: DEBUG (muestra todo)
+# En producción: INFO o WARN (solo eventos importantes)
+# IMPORTANTE: Nunca loguear passwords, tokens o información sensible
+logging.level.com.makeyourbuild.api=INFO
+logging.level.org.springframework.security=WARN
+logging.level.org.hibernate.SQL=false
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=false
