@@ -1,0 +1,32 @@
+# MakeYourBuild API - Archivo de Configuración de Ejemplo
+# 
+# INSTRUCCIONES:
+# 1. Copia este archivo como 'application.properties'
+# 2. Reemplaza los valores de ejemplo con tus credenciales reales
+
+spring.application.name=MakeYourBuild API
+
+# Configuración del servidor
+server.port=8080
+server.servlet.context-path=/
+
+# Configuración de CORS (desarrollo)
+# En producción, configura los orígenes permitidos según tu dominio
+cors.allowed-origins=http://localhost:3000,http://localhost:5173,http://localhost:4200
+
+# Configuración de la base de datos (Supabase PostgreSQL)
+# IMPORTANTE: Reemplaza estos valores con tus credenciales reales
+spring.datasource.url=jdbc:postgresql://TU_HOST:5432/postgres?sslmode=require
+spring.datasource.username=TU_USUARIO
+spring.datasource.password=TU_CONTRASEÑA
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA/Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+# Logging
+logging.level.com.makeyourbuild.api=DEBUG
+logging.level.org.springframework.security=DEBUG
