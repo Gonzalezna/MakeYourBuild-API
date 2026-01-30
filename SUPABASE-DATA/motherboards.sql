@@ -94,6 +94,55 @@ INSERT INTO motherboards (name, brand, socket, ram_type, max_frequency, price, c
 ('Gigabyte X670E Aorus Xtreme', 'Gigabyte', 'AM5', 'DDR5', 6400, 699.99, 'X670E', 'ATX', 4, 'Ryzen 7000,Ryzen 8000,Ryzen 9000', 40, 3, 8),
 
 -- ============================================
+-- Intel LGA1151 Motherboards - 6th/7th/8th/9th Gen
+-- ============================================
+-- Intel LGA1151 - Gama Baja (H310, B360)
+('ASUS Prime H310M-K', 'ASUS', 'LGA1151', 'DDR4', 2666, 69.99, 'H310', 'MATX', 2, '6th,7th,8th,9th', 20, 1, 4),
+('MSI H310M Pro-VDH', 'MSI', 'LGA1151', 'DDR4', 2666, 64.99, 'H310', 'MATX', 2, '6th,7th,8th,9th', 20, 1, 4),
+('Gigabyte H310M S2H', 'Gigabyte', 'LGA1151', 'DDR4', 2666, 59.99, 'H310', 'MATX', 2, '6th,7th,8th,9th', 20, 1, 4),
+('ASRock H310M Pro4', 'ASRock', 'LGA1151', 'DDR4', 2666, 69.99, 'H310', 'MATX', 2, '6th,7th,8th,9th', 20, 1, 4),
+('ASUS Prime B360M-A', 'ASUS', 'LGA1151', 'DDR4', 2666, 79.99, 'B360', 'MATX', 2, '8th,9th', 25, 1, 4),
+('MSI B360M Pro-VDH', 'MSI', 'LGA1151', 'DDR4', 2666, 74.99, 'B360', 'MATX', 2, '8th,9th', 25, 1, 4),
+('Gigabyte B360M DS3H', 'Gigabyte', 'LGA1151', 'DDR4', 2666, 69.99, 'B360', 'MATX', 2, '8th,9th', 25, 1, 4),
+('ASRock B360M Pro4', 'ASRock', 'LGA1151', 'DDR4', 2666, 79.99, 'B360', 'MATX', 4, '8th,9th', 25, 1, 4),
+
+-- Intel LGA1151 - Gama Media (B365, H370)
+('ASUS Prime B365M-A', 'ASUS', 'LGA1151', 'DDR4', 2666, 89.99, 'B365', 'MATX', 2, '8th,9th', 25, 1, 4),
+('MSI B365M Pro-VDH', 'MSI', 'LGA1151', 'DDR4', 2666, 84.99, 'B365', 'MATX', 2, '8th,9th', 25, 1, 4),
+('Gigabyte B365M DS3H', 'Gigabyte', 'LGA1151', 'DDR4', 2666, 79.99, 'B365', 'MATX', 2, '8th,9th', 25, 1, 4),
+('ASRock B365M Pro4', 'ASRock', 'LGA1151', 'DDR4', 2666, 89.99, 'B365', 'MATX', 4, '8th,9th', 25, 1, 4),
+('ASUS Prime B365-Plus', 'ASUS', 'LGA1151', 'DDR4', 2666, 109.99, 'B365', 'ATX', 4, '8th,9th', 25, 2, 6),
+('MSI B365-A Pro', 'MSI', 'LGA1151', 'DDR4', 2666, 104.99, 'B365', 'ATX', 4, '8th,9th', 25, 2, 6),
+('Gigabyte B365 Aorus Elite', 'Gigabyte', 'LGA1151', 'DDR4', 2666, 119.99, 'B365', 'ATX', 4, '8th,9th', 25, 2, 6),
+('ASUS TUF Gaming H370-Pro', 'ASUS', 'LGA1151', 'DDR4', 2666, 129.99, 'H370', 'ATX', 4, '8th,9th', 30, 2, 6),
+('MSI H370-A Pro', 'MSI', 'LGA1151', 'DDR4', 2666, 124.99, 'H370', 'ATX', 4, '8th,9th', 30, 2, 6),
+('Gigabyte H370 Aorus Gaming 3', 'Gigabyte', 'LGA1151', 'DDR4', 2666, 139.99, 'H370', 'ATX', 4, '8th,9th', 30, 2, 6),
+
+-- Intel LGA1151 - Gama Alta (Z370, Z390)
+('ASUS Prime Z370-P', 'ASUS', 'LGA1151', 'DDR4', 3200, 149.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('MSI Z370-A Pro', 'MSI', 'LGA1151', 'DDR4', 3200, 144.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('Gigabyte Z370 UD', 'Gigabyte', 'LGA1151', 'DDR4', 3200, 139.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('ASUS TUF Gaming Z370-Plus', 'ASUS', 'LGA1151', 'DDR4', 3200, 169.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('MSI Z370 Tomahawk', 'MSI', 'LGA1151', 'DDR4', 3200, 179.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('Gigabyte Z370 Aorus Gaming 3', 'Gigabyte', 'LGA1151', 'DDR4', 3200, 169.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('ASUS ROG Strix Z370-E Gaming', 'ASUS', 'LGA1151', 'DDR4', 3200, 249.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('MSI Z370 Gaming Pro Carbon', 'MSI', 'LGA1151', 'DDR4', 3200, 229.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('Gigabyte Z370 Aorus Gaming 5', 'Gigabyte', 'LGA1151', 'DDR4', 3200, 219.99, 'Z370', 'ATX', 4, '8th,9th', 35, 2, 6),
+('ASUS Prime Z390-P', 'ASUS', 'LGA1151', 'DDR4', 3200, 159.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('MSI Z390-A Pro', 'MSI', 'LGA1151', 'DDR4', 3200, 154.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('Gigabyte Z390 UD', 'Gigabyte', 'LGA1151', 'DDR4', 3200, 149.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('ASUS TUF Gaming Z390-Plus', 'ASUS', 'LGA1151', 'DDR4', 3200, 179.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('MSI Z390 Tomahawk', 'MSI', 'LGA1151', 'DDR4', 3200, 189.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('Gigabyte Z390 Aorus Elite', 'Gigabyte', 'LGA1151', 'DDR4', 3200, 179.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('ASUS ROG Strix Z390-E Gaming', 'ASUS', 'LGA1151', 'DDR4', 3200, 259.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('MSI Z390 Gaming Pro Carbon', 'MSI', 'LGA1151', 'DDR4', 3200, 239.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('Gigabyte Z390 Aorus Pro', 'Gigabyte', 'LGA1151', 'DDR4', 3200, 229.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('ASRock Z390 Taichi', 'ASRock', 'LGA1151', 'DDR4', 3200, 279.99, 'Z390', 'ATX', 4, '8th,9th', 35, 2, 6),
+('ASUS ROG Maximus XI Hero', 'ASUS', 'LGA1151', 'DDR4', 3200, 449.99, 'Z390', 'ATX', 4, '8th,9th', 35, 3, 8),
+('MSI Z390 Godlike', 'MSI', 'LGA1151', 'DDR4', 3200, 599.99, 'Z390', 'ATX', 4, '8th,9th', 35, 3, 8),
+('Gigabyte Z390 Aorus Xtreme', 'Gigabyte', 'LGA1151', 'DDR4', 3200, 499.99, 'Z390', 'ATX', 4, '8th,9th', 35, 3, 8),
+
+-- ============================================
 -- Intel LGA1200 Motherboards - 9th/10th/11th Gen
 -- ============================================
 -- Intel LGA1200 - Gama Baja (H470, B460)

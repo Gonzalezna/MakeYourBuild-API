@@ -156,11 +156,16 @@ public class RamService {
     
     /**
      * Convierte entidad a DTO.
+     * Incluye la frecuencia en el nombre para que sea visible en los listados.
      */
     private RamDTO toDTO(Ram ram) {
         RamDTO dto = new RamDTO();
         dto.setId(ram.getId());
-        dto.setName(ram.getName());
+        
+        // Construir nombre con frecuencia incluida para listados
+        String nameWithFrequency = buildRamNameWithFrequency(ram);
+        dto.setName(nameWithFrequency);
+        
         dto.setBrand(ram.getBrand());
         dto.setType(ram.getType());
         dto.setFrequency(ram.getFrequency());
@@ -169,5 +174,33 @@ public class RamService {
         dto.setPrice(ram.getPrice());
         dto.setCasLatency(ram.getCasLatency());
         return dto;
+    }
+    
+    /**
+     * Construye el nombre de la RAM incluyendo la frecuencia.
+     * Formato: "Nombre Original DDR4 3200MHz"
+     * 
+     * @param ram Entidad RAM
+     * @return Nombre con frecuencia incluida
+     */
+    private String buildRamNameWithFrequency(Ram ram) {
+        String originalName = ram.getName();
+        Integer frequency = ram.getFrequency();
+        
+        if (frequency == null) {
+            return originalName; // Si no hay frecuencia, retornar nombre original
+        }
+        
+        // Verificar si el nombre ya incluye la frecuencia
+        String frequencyStr = frequency + "MHz";
+        if (originalName.contains(frequencyStr) || originalName.contains(frequency.toString())) {
+            return originalName; // Ya tiene la frecuencia, no duplicar
+        }
+        
+        // Agregar tipo de RAM y frecuencia al final
+        String ramType = ram.getType() != null ? ram.getType().toString() : "";
+        String suffix = ramType.isEmpty() ? frequencyStr : ramType + " " + frequencyStr;
+        
+        return originalName + " " + suffix;
     }
 }
