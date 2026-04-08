@@ -74,69 +74,53 @@ public class BuildService {
         MotherboardDTO motherboard = motherboardService.getMotherboardById(request.getMotherboardId());
         
         // Cargar múltiples RAMs
-        List<RamDTO> ramDTOs = null;
-        List<com.makeyourbuild.api.domain.model.Ram> ramEntities = null;
-        if (request.getRamIds() != null && !request.getRamIds().isEmpty()) {
-            ramDTOs = request.getRamIds().stream()
-                .map(ramService::getRamById)
-                .collect(Collectors.toList());
-            ramEntities = request.getRamIds().stream()
-                .map(ramService::getRamEntityById)
-                .collect(Collectors.toList());
-        }
+        List<RamDTO> ramDTOs = request.getRamIds().stream()
+            .map(ramService::getRamById)
+            .collect(Collectors.toList());
+        List<com.makeyourbuild.api.domain.model.Ram> ramEntities = request.getRamIds().stream()
+            .map(ramService::getRamEntityById)
+            .collect(Collectors.toList());
+
+        // Storage es obligatorio para una build completa
+        List<Storage> storages = request.getStorageIds().stream()
+            .map(storageService::getStorageEntityById)
+            .collect(Collectors.toList());
+        
+        // GPU es el único componente opcional
+        com.makeyourbuild.api.domain.model.Gpu gpu = request.getGpuId() != null
+            ? gpuService.getGpuEntityById(request.getGpuId())
+            : null;
         
         // Convertir a entidades para el contexto de validación
         BuildContext context = new BuildContext(
             cpuService.getCpuEntityById(request.getCpuId()),
             motherboardService.getMotherboardEntityById(request.getMotherboardId()),
-            ramEntities != null ? ramEntities : new ArrayList<>()
+            ramEntities,
+            storages,
+            gpu,
+            psuService.getPsuEntityById(request.getPsuId()),
+            caseService.getCaseEntityById(request.getCaseId())
         );
         
-        // Cargar componentes opcionales
-        if (request.getStorageIds() != null && !request.getStorageIds().isEmpty()) {
-            List<Storage> storages = request.getStorageIds().stream()
-                .map(storageService::getStorageEntityById)
-                .collect(Collectors.toList());
-            context.setStorages(storages);
-        }
-        
-        if (request.getGpuId() != null) {
-            context.setGpu(gpuService.getGpuEntityById(request.getGpuId()));
-        }
-        
-        if (request.getPsuId() != null) {
-            context.setPsu(psuService.getPsuEntityById(request.getPsuId()));
-        }
-        
-        if (request.getCaseId() != null) {
-            context.setCase(caseService.getCaseEntityById(request.getCaseId()));
-        }
-        
-        // Crear respuesta
+        // Respuesta con la build completa (GPU null si solo iGPU)
         BuildResponseDTO response = new BuildResponseDTO();
         response.setCpu(cpu);
         response.setMotherboard(motherboard);
         response.setRams(ramDTOs);
         
-        // Agregar componentes opcionales a la respuesta
-        if (context.getStorages() != null && !context.getStorages().isEmpty()) {
-            List<StorageDTO> storageDTOs = context.getStorages().stream()
-                .map(s -> storageService.getStorageById(s.getId()))
-                .collect(Collectors.toList());
-            response.setStorages(storageDTOs);
+        List<StorageDTO> storageDTOs = context.getStorages().stream()
+            .map(s -> storageService.getStorageById(s.getId()))
+            .collect(Collectors.toList());
+        response.setStorages(storageDTOs);
+        
+        if (request.getGpuId() != null) {
+            response.setGpu(gpuService.getGpuById(request.getGpuId()));
+        } else {
+            response.setGpu(null);
         }
         
-        if (context.getGpu() != null) {
-            response.setGpu(gpuService.getGpuById(context.getGpu().getId()));
-        }
-        
-        if (context.getPsu() != null) {
-            response.setPsu(psuService.getPsuById(context.getPsu().getId()));
-        }
-        
-        if (context.getCase() != null) {
-            response.setCase(caseService.getCaseById(context.getCase().getId()));
-        }
+        response.setPsu(psuService.getPsuById(request.getPsuId()));
+        response.setCase(caseService.getCaseById(request.getCaseId()));
         
         // Calcular precio total
         response.setTotalPrice(context.getTotalPrice());

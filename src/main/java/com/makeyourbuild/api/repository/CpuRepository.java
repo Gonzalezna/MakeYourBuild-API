@@ -1,7 +1,8 @@
 package com.makeyourbuild.api.repository;
 
-import com.makeyourbuild.api.domain.model.Cpu;
+import com.makeyourbuild.api.domain.enums.ComponentTier;
 import com.makeyourbuild.api.domain.enums.SocketType;
+import com.makeyourbuild.api.domain.model.Cpu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +27,5 @@ public interface CpuRepository extends JpaRepository<Cpu, Long> {
     /**
      * Busca CPUs por gama (tier).
      */
-    List<Cpu> findByTier(String tier);
+    List<Cpu> findByTier(ComponentTier tier);
 }

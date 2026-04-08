@@ -23,7 +23,11 @@ public class PsuWattageRule implements CompatibilityRule {
         Psu psu = context.getPsu();
         
         if (psu == null) {
-            return RuleResult.valid(); // PSU es opcional en el MVP
+            return RuleResult.error(
+                ErrorCode.PSU_INSUFFICIENT,
+                "La configuración debe incluir una PSU",
+                "psu"
+            );
         }
         
         int totalConsumption = calculateTotalConsumption(context);

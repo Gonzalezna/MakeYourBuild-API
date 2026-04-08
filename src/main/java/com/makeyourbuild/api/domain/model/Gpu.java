@@ -1,5 +1,6 @@
 package com.makeyourbuild.api.domain.model;
 
+import com.makeyourbuild.api.domain.enums.ComponentTier;
 import com.makeyourbuild.api.domain.enums.PcieVersion;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -43,8 +44,9 @@ public class Gpu implements PricedComponent {
     @Column
     private Integer vram; // VRAM en GB (ej: 8, 12, 16, 24)
     
+    @Enumerated(EnumType.STRING)
     @Column
-    private String tier; // low, mid, high, enthusiast
+    private ComponentTier tier;
     
     // Constructors
     public Gpu() {}
@@ -138,11 +140,11 @@ public class Gpu implements PricedComponent {
         this.vram = vram;
     }
     
-    public String getTier() {
+    public ComponentTier getTier() {
         return tier;
     }
     
-    public void setTier(String tier) {
+    public void setTier(ComponentTier tier) {
         this.tier = tier;
     }
 }

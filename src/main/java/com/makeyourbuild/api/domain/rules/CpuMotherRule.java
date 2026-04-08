@@ -21,14 +21,9 @@ public class CpuMotherRule implements CompatibilityRule {
         }
         
         if (!cpu.getSocket().equals(motherboard.getSocket())) {
-            // Obtener marcas para mensaje más claro
             String cpuBrand = cpu.getBrand() != null ? cpu.getBrand() : "";
             String mbBrand = motherboard.getBrand() != null ? motherboard.getBrand() : "";
-            
-            // Determinar fabricante del socket (Intel usa LGA, AMD usa AM)
-            String cpuSocketBrand = cpu.getSocket().toString().startsWith("LGA") ? "Intel" : "AMD";
-            String mbSocketBrand = motherboard.getSocket().toString().startsWith("LGA") ? "Intel" : "AMD";
-            
+
             return RuleResult.error(
                 ErrorCode.CPU_SOCKET_MISMATCH,
                 String.format(
@@ -37,8 +32,8 @@ public class CpuMotherRule implements CompatibilityRule {
                     cpu.getSocket(),
                     mbBrand,
                     motherboard.getSocket(),
-                    cpuSocketBrand,
-                    mbSocketBrand
+                    cpuBrand,
+                    mbBrand
                 ),
                 "cpu,motherboard"
             );

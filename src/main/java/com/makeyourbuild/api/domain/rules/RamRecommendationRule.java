@@ -1,5 +1,6 @@
 package com.makeyourbuild.api.domain.rules;
 
+import com.makeyourbuild.api.domain.enums.ComponentTier;
 import com.makeyourbuild.api.domain.enums.WarningCode;
 import com.makeyourbuild.api.domain.model.BuildContext;
 import com.makeyourbuild.api.domain.model.Cpu;
@@ -25,9 +26,8 @@ public class RamRecommendationRule implements CompatibilityRule {
             return RuleResult.valid();
         }
         
-        // Verificar si la CPU es de gama alta o enthusiast
-        String tier = cpu.getTier();
-        boolean isHighEndCpu = "high".equalsIgnoreCase(tier) || "enthusiast".equalsIgnoreCase(tier);
+        ComponentTier tier = cpu.getTier();
+        boolean isHighEndCpu = tier == ComponentTier.HIGH || tier == ComponentTier.ENTHUSIAST;
         
         if (!isHighEndCpu) {
             return RuleResult.valid(); // Solo aplicar a CPUs de gama alta o enthusiast

@@ -1,29 +1,34 @@
 package com.makeyourbuild.api.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 /**
  * DTO para solicitud de validación de build.
  * Contiene los IDs de los componentes seleccionados.
+ * Una build completa requiere todos los componentes excepto GPU (opcional).
  */
 public class BuildRequestDTO {
     
+    @NotNull
     private Long cpuId;
+    @NotNull
     private Long motherboardId;
+    @NotEmpty
     private List<Long> ramIds; // Puede haber múltiples módulos de RAM
+    @NotEmpty
     private List<Long> storageIds; // Puede haber múltiples unidades de almacenamiento
+    // Opcional: una PC puede funcionar con iGPU sin GPU discreta
     private Long gpuId;
+    @NotNull
     private Long psuId;
+    @NotNull
     private Long caseId;
     
     // Constructors
     public BuildRequestDTO() {}
-    
-    public BuildRequestDTO(Long cpuId, Long motherboardId, List<Long> ramIds) {
-        this.cpuId = cpuId;
-        this.motherboardId = motherboardId;
-        this.ramIds = ramIds;
-    }
     
     // Getters and Setters
     public Long getCpuId() {

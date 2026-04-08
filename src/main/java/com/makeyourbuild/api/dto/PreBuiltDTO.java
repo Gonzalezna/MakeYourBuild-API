@@ -1,47 +1,73 @@
 package com.makeyourbuild.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
+import com.makeyourbuild.api.domain.enums.PreBuiltCategory;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Respuesta de validación de una configuración de PC completa.
- * Incluye todos los componentes seleccionados (CPU, motherboard, RAM, almacenamiento,
- * PSU, gabinete); la GPU discreta puede ser {@code null} cuando el build usa solo iGPU.
- * También devuelve {@code valid}, precio total, errores y advertencias de compatibilidad.
+ * DTO para transferencia de datos de Pre-Built builds.
+ * Incluye los componentes completos para facilitar el uso en el frontend.
  */
-public class BuildResponseDTO {
+public class PreBuiltDTO {
     
-    private boolean valid;
+    private Long id;
+    private String name;
+    private String description;
+    private PreBuiltCategory category;
     private BigDecimal totalPrice;
+    private String imageUrl;
     private CpuDTO cpu;
     private MotherboardDTO motherboard;
     private List<RamDTO> rams;
     private List<StorageDTO> storages;
-    /** Siempre presente en JSON; {@code null} si no hay GPU discreta. */
-    @JsonInclude(JsonInclude.Include.ALWAYS)
     private GpuDTO gpu;
     private PsuDTO psu;
     private CaseDTO caseEntity;
-    private List<ErrorDTO> errors;
-    private List<WarningDTO> warnings;
     
-    public BuildResponseDTO() {
-        this.rams = new ArrayList<>();
-        this.storages = new ArrayList<>();
-        this.errors = new ArrayList<>();
-        this.warnings = new ArrayList<>();
+    // Constructors
+    public PreBuiltDTO() {}
+    
+    public PreBuiltDTO(Long id, String name, String description, PreBuiltCategory category, 
+                      BigDecimal totalPrice, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.totalPrice = totalPrice;
+        this.imageUrl = imageUrl;
     }
     
     // Getters and Setters
-    public boolean isValid() {
-        return valid;
+    public Long getId() {
+        return id;
     }
     
-    public void setValid(boolean valid) {
-        this.valid = valid;
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public PreBuiltCategory getCategory() {
+        return category;
+    }
+    
+    public void setCategory(PreBuiltCategory category) {
+        this.category = category;
     }
     
     public BigDecimal getTotalPrice() {
@@ -52,6 +78,15 @@ public class BuildResponseDTO {
         this.totalPrice = totalPrice;
     }
     
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    // Getters and Setters para componentes completos
     public CpuDTO getCpu() {
         return cpu;
     }
@@ -74,30 +109,6 @@ public class BuildResponseDTO {
     
     public void setRams(List<RamDTO> rams) {
         this.rams = rams;
-    }
-    
-    public List<ErrorDTO> getErrors() {
-        return errors;
-    }
-    
-    public void setErrors(List<ErrorDTO> errors) {
-        this.errors = errors;
-    }
-    
-    public void addError(ErrorDTO error) {
-        this.errors.add(error);
-    }
-    
-    public List<WarningDTO> getWarnings() {
-        return warnings;
-    }
-    
-    public void setWarnings(List<WarningDTO> warnings) {
-        this.warnings = warnings;
-    }
-    
-    public void addWarning(WarningDTO warning) {
-        this.warnings.add(warning);
     }
     
     public List<StorageDTO> getStorages() {

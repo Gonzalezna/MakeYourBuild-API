@@ -30,8 +30,7 @@ public class CaseFormFactorRule implements CompatibilityRule {
             return RuleResult.valid(); // No se puede validar sin form factors
         }
         
-        // Verificar compatibilidad usando la utilidad centralizada
-        if (!FormFactorUtils.isCompatible(caseFormFactor, mbFormFactor)) {
+        if (!FormFactor.isCompatible(caseFormFactor, mbFormFactor)) {
             return RuleResult.error(
                 ErrorCode.CASE_FORM_FACTOR_INCOMPATIBLE,
                 String.format(

@@ -64,7 +64,7 @@ public class CpuService {
         dto.setBaseClock(cpu.getBaseClock());
         dto.setBoostClock(cpu.getBoostClock());
         dto.setTdp(cpu.getTdp());
-        dto.setTier(cpu.getTier());
+        dto.setTier(cpu.getTier() != null ? cpu.getTier().name().toLowerCase() : null);
         dto.setMinRamFrequency(cpu.getMinRamFrequency());
         dto.setGeneration(cpu.getGeneration());
         return dto;

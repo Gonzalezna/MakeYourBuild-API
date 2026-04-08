@@ -7,6 +7,7 @@ import com.makeyourbuild.api.domain.model.Motherboard;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Regla de compatibilidad: Validar compatibilidad de generación de CPU con chipset.
@@ -50,16 +51,11 @@ public class ChipsetCompatibilityRule implements CompatibilityRule {
         
         // Validar si la generación de la CPU está en la lista de generaciones soportadas
         if (!supportedList.contains(cpuGeneration)) {
-            // Obtener marca de CPU para mensaje más claro (ej: "AMD", "Intel")
             String cpuBrand = cpu.getBrand() != null ? cpu.getBrand() : "";
-            
-            // Determinar fabricante del chipset a partir del socket de la motherboard
             String chipset = motherboard.getChipset() != null ? motherboard.getChipset() : "desconocido";
-            String chipsetBrand = detectBrandBySocket(motherboard.getSocket());
-            
-            // Formatear generaciones soportadas con la marca del chipset
+            String chipsetBrand = motherboard.getBrand() != null ? motherboard.getBrand() : "";
             String formattedGenerations = formatSupportedGenerations(
-                motherboard.getSupportedCpuGenerations(), 
+                motherboard.getSupportedCpuGenerations(),
                 chipsetBrand
             );
             
@@ -81,47 +77,27 @@ public class ChipsetCompatibilityRule implements CompatibilityRule {
     }
     
     /**
-     * Determina la marca (Intel/AMD) a partir del socket de la motherboard.
-     * Sockets que comienzan con LGA se consideran Intel, sockets que comienzan con AM se consideran AMD.
-     */
-    private String detectBrandBySocket(com.makeyourbuild.api.domain.enums.SocketType socket) {
-        if (socket == null) {
-            return "desconocido";
-        }
-        String name = socket.toString().toUpperCase();
-        if (name.startsWith("LGA")) {
-            return "Intel";
-        }
-        if (name.startsWith("AM")) {
-            return "AMD";
-        }
-        return "desconocido";
-    }
-    
-    /**
-     * Formatea las generaciones soportadas para incluir la marca.
-     * Entrada: "9th,10th,11th"
+     * Formatea las generaciones soportadas para incluir la marca de la motherboard.
+     * Entrada: "9th,10th,11th", brand: "Intel"
      * Salida: "Intel 9th, Intel 10th, Intel 11th"
+     * Si la generación ya contiene la marca, no la duplica.
      */
     private String formatSupportedGenerations(String generations, String brand) {
         if (generations == null || generations.isEmpty()) {
             return generations;
         }
-        
+
+        String brandLower = brand != null ? brand.toLowerCase() : "";
         return Arrays.stream(generations.split(","))
             .map(String::trim)
             .filter(g -> !g.isEmpty())
             .map(gen -> {
-                // Si ya tiene la marca (como "Ryzen 3000"), no agregarla
-                if (gen.toLowerCase().contains("ryzen") || 
-                    gen.toLowerCase().contains("intel") ||
-                    gen.toLowerCase().contains("amd")) {
-                    return gen;
+                if (!brandLower.isEmpty() && !gen.toLowerCase().contains(brandLower)) {
+                    return brand + " " + gen;
                 }
-                return brand + " " + gen;
+                return gen;
             })
-            .reduce((a, b) -> a + ", " + b)
-            .orElse(generations);
+            .collect(Collectors.joining(", "));
     }
     
     @Override

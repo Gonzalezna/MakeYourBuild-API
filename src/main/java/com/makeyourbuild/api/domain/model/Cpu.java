@@ -1,5 +1,6 @@
 package com.makeyourbuild.api.domain.model;
 
+import com.makeyourbuild.api.domain.enums.ComponentTier;
 import com.makeyourbuild.api.domain.enums.SocketType;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -43,8 +44,9 @@ public class Cpu implements PricedComponent {
     @Column
     private Integer tdp; // Thermal Design Power en watts
     
+    @Enumerated(EnumType.STRING)
     @Column
-    private String tier; // "low", "mid", "high" para determinar gama
+    private ComponentTier tier;
     
     @Column
     private Integer minRamFrequency; // Frecuencia mínima recomendada de RAM en MHz
@@ -147,11 +149,11 @@ public class Cpu implements PricedComponent {
         this.tdp = tdp;
     }
     
-    public String getTier() {
+    public ComponentTier getTier() {
         return tier;
     }
     
-    public void setTier(String tier) {
+    public void setTier(ComponentTier tier) {
         this.tier = tier;
     }
     

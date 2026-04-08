@@ -64,7 +64,7 @@ public class GpuService {
         dto.setWidth(gpu.getWidth());
         dto.setHeight(gpu.getHeight());
         dto.setVram(gpu.getVram());
-        dto.setTier(gpu.getTier());
+        dto.setTier(gpu.getTier() != null ? gpu.getTier().name().toLowerCase() : null);
         return dto;
     }
 }

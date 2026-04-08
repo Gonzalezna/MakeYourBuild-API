@@ -18,10 +18,22 @@ public class BuildContext {
     
     public BuildContext() {}
     
-    public BuildContext(Cpu cpu, Motherboard motherboard, List<Ram> rams) {
+    public BuildContext(
+        Cpu cpu,
+        Motherboard motherboard,
+        List<Ram> rams,
+        List<Storage> storages,
+        Gpu gpu,
+        Psu psu,
+        Case caseEntity
+    ) {
         this.cpu = cpu;
         this.motherboard = motherboard;
         this.rams = rams;
+        this.storages = storages;
+        this.gpu = gpu;
+        this.psu = psu;
+        this.caseEntity = caseEntity;
     }
     
     public Cpu getCpu() {

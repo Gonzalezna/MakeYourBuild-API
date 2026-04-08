@@ -58,6 +58,16 @@ El objetivo principal de este proyecto es demostrar habilidades en:
 - Soporte para múltiples módulos de RAM y unidades de almacenamiento
 - Precisión con `BigDecimal` para cálculos monetarios
 
+### Builds Predefinidos (Pre-Built)
+- Catálogo de builds predefinidos organizados por categoría
+- Categorías disponibles: Gaming, Workstation, Graphic design, Streaming, Personal/Home
+- Cada build incluye **componentes completos** (no solo IDs) y precio total calculado
+- Los componentes se devuelven como objetos completos (CpuDTO, MotherboardDTO, RamDTO, etc.) para facilitar el uso en el frontend
+- Búsqueda inteligente por presupuesto: retorna 3 builds (por debajo, justo, por encima del presupuesto)
+- Expansión automática de rangos si no hay suficientes builds en el rango inicial
+- Validación de compatibilidad para builds predefinidos
+- Conversión automática de builds predefinidos a BuildRequestDTO para validación
+
 ### Validación de Compatibilidad
 - Validación de socket CPU-Motherboard
 - Validación de chipset y generación de CPU //Es posible que el socket CPU-Motherboard sea compatible, pero el chipset no soporte generaciones de CPU muy antiguas
@@ -204,6 +214,13 @@ http://localhost:8080/api
 **Validación de Build**
 - `POST /api/builds/validate` - Valida una configuración completa y calcula presupuesto
 
+**Pre-Built (Builds Predefinidos)**
+- `GET /api/pre-built` - Lista todos los builds predefinidos
+- `GET /api/pre-built?category={category}` - Lista builds predefinidos por categoría
+- `GET /api/pre-built?category={category}&budget={budget}` - Busca 3 builds según categoría y presupuesto (uno por debajo, uno justo, uno por encima)
+- `GET /api/pre-built/{id}` - Obtiene un build predefinido por ID
+- `POST /api/pre-built/{id}/validate` - Valida un build predefinido
+
 **Health Check**
 - `GET /api/health` - Verifica el estado del servidor
 
@@ -277,6 +294,7 @@ Los scripts SQL para poblar la base de datos con datos de ejemplo se encuentran 
 - `tarjetas graficas.sql` - GPUs
 - `fuentes_poder.sql` - Fuentes de alimentación
 - `gabinetes.sql` - Gabinetes
+- `pre_built_builds.sql` - Builds predefinidos por categoría
 
 Ejecuta estos scripts en tu base de datos PostgreSQL usando el SQL Editor de Supabase o cualquier cliente PostgreSQL.
 
@@ -361,7 +379,6 @@ backend/
 - Agregar tests de integración para endpoints principales
 - Implementar paginación en endpoints de listado
 - Agregar filtros y búsqueda en endpoints de componentes
-- Implementacion del feature Pre-Built, donde muestra equipos pre-armados segun tu presupuesto y objetivo del equipo
 - Listado de componentes disponibles en la web
 
 ### Mediano Plazo
@@ -389,6 +406,7 @@ El proyecto está en un estado funcional completo con todas las funcionalidades 
 -  Sistema de errores y advertencias estructurado
 -  Manejo de errores robusto
 -  Configuración de seguridad implementada
+-  Funcionalidad Pre-Built implementada (builds predefinidos por categoría)
 -  Documentación completa
 
 **Próximos Pasos**: 

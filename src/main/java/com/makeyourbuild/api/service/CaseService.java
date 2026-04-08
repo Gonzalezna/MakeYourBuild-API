@@ -106,13 +106,13 @@ public class CaseService {
     
     /**
      * Verifica si el form factor del case es compatible con el de la motherboard.
-     * Delega la lógica a FormFactorUtils para evitar duplicación de código.
+     * Delega la compatibilidad a {@link FormFactor#isCompatible}.
      */
     private boolean isFormFactorCompatible(Case caseEntity, com.makeyourbuild.api.domain.model.Motherboard motherboard) {
         FormFactor caseFormFactor = caseEntity.getSupportedFormFactor();
         FormFactor mbFormFactor = FormFactorUtils.fromString(motherboard.getFormFactor());
         
-        return FormFactorUtils.isCompatible(caseFormFactor, mbFormFactor);
+        return FormFactor.isCompatible(caseFormFactor, mbFormFactor);
     }
     
     /**

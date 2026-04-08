@@ -1,7 +1,8 @@
 package com.makeyourbuild.api.repository;
 
-import com.makeyourbuild.api.domain.model.Gpu;
+import com.makeyourbuild.api.domain.enums.ComponentTier;
 import com.makeyourbuild.api.domain.enums.PcieVersion;
+import com.makeyourbuild.api.domain.model.Gpu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +27,5 @@ public interface GpuRepository extends JpaRepository<Gpu, Long> {
     /**
      * Busca GPUs por gama (tier).
      */
-    List<Gpu> findByTier(String tier);
+    List<Gpu> findByTier(ComponentTier tier);
 }

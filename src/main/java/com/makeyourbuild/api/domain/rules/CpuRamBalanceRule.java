@@ -1,5 +1,7 @@
 package com.makeyourbuild.api.domain.rules;
 
+import com.makeyourbuild.api.domain.enums.ComponentTier;
+import com.makeyourbuild.api.domain.enums.RamType;
 import com.makeyourbuild.api.domain.enums.WarningCode;
 import com.makeyourbuild.api.domain.model.BuildContext;
 import com.makeyourbuild.api.domain.model.Cpu;
@@ -27,9 +29,8 @@ public class CpuRamBalanceRule implements CompatibilityRule {
             return RuleResult.valid();
         }
         
-        // Verificar si la CPU es de gama alta o enthusiast
-        String tier = cpu.getTier();
-        boolean isHighEndCpu = "high".equalsIgnoreCase(tier) || "enthusiast".equalsIgnoreCase(tier);
+        ComponentTier tier = cpu.getTier();
+        boolean isHighEndCpu = tier == ComponentTier.HIGH || tier == ComponentTier.ENTHUSIAST;
         
         if (!isHighEndCpu) {
             return RuleResult.valid(); // Solo aplicar a CPUs de gama alta o enthusiast
@@ -37,9 +38,8 @@ public class CpuRamBalanceRule implements CompatibilityRule {
         
         // Validar cada RAM - si alguna tiene frecuencia muy baja, generar advertencia
         for (Ram ram : rams) {
-            // Determinar umbral según tipo de RAM
-            int lowFrequencyThreshold = ram.getType().toString().equals("DDR5") 
-                ? LOW_FREQUENCY_THRESHOLD_DDR5 
+            int lowFrequencyThreshold = ram.getType() == RamType.DDR5
+                ? LOW_FREQUENCY_THRESHOLD_DDR5
                 : LOW_FREQUENCY_THRESHOLD_DDR4;
             
             // Validar si la frecuencia es muy baja para una CPU de gama alta

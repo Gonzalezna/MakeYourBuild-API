@@ -3,6 +3,7 @@ package com.makeyourbuild.api.controller;
 import com.makeyourbuild.api.dto.BuildRequestDTO;
 import com.makeyourbuild.api.dto.PsuDTO;
 import com.makeyourbuild.api.service.PsuService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,12 +38,12 @@ public class PsuController {
     }
     
     /**
-     * Lista PSUs compatibles con una configuración parcial de build.
-     * Body: BuildRequestDTO (todos los campos opcionales)
+     * Lista PSUs compatibles con una configuración completa de build.
+     * GPU es el único componente opcional.
      */
     @PostMapping("/compatible")
     public ResponseEntity<List<PsuDTO>> getCompatiblePsus(
-            @RequestBody BuildRequestDTO buildRequest) {
+            @Valid @RequestBody BuildRequestDTO buildRequest) {
         List<PsuDTO> psus = psuService.getCompatiblePsus(buildRequest);
         return ResponseEntity.ok(psus);
     }
