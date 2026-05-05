@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Regla de compatibilidad: Validar compatibilidad de generación de CPU con chipset.
+ * Regla bloqueante: la generación de la CPU debe estar entre las soportadas por el chipset.
  * Algunos chipsets no soportan todas las generaciones de CPUs del mismo socket.
- * Esta es una regla BLOQUEANTE (ERROR).
- * 
- * Usa campos configurables (generation y supportedCpuGenerations) en lugar de hardcodeo.
+ * Si falla, la configuración no es válida (ERROR).
+ * <p>
+ * Usa los campos configurables {@code generation} y {@code supportedCpuGenerations}.
  */
 public class ChipsetCompatibilityRule implements CompatibilityRule {
     

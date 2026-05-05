@@ -12,9 +12,9 @@ import com.makeyourbuild.api.domain.model.Storage;
 import java.util.List;
 
 /**
- * Regla de compatibilidad: PSU debe tener suficiente potencia para todos los componentes.
- * Calcula: CPU TDP + GPU TDP + Motherboard power + RAM (5W por módulo) + Storage (10W por disco) + 20% overhead
- * Esta es una regla BLOQUEANTE (ERROR).
+ * Regla bloqueante: la PSU debe cubrir el consumo estimado de los componentes.
+ * Calcula: CPU TDP + GPU TDP + motherboard + RAM (5W por módulo) + almacenamiento (10W por disco) + 20% de margen.
+ * Si falla, la configuración no es válida (ERROR).
  */
 public class PsuWattageRule implements CompatibilityRule {
     

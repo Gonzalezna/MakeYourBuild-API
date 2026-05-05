@@ -8,8 +8,8 @@ import com.makeyourbuild.api.domain.model.Ram;
 import java.util.List;
 
 /**
- * Regla de compatibilidad: Validar que los módulos de RAM no excedan los slots disponibles.
- * Esta es una regla BLOQUEANTE (ERROR).
+ * Regla bloqueante: los módulos de RAM no pueden exceder los slots de la motherboard.
+ * Si falla, la configuración no es válida (ERROR).
  */
 public class RamSlotsRule implements CompatibilityRule {
     

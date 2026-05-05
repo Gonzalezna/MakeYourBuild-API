@@ -36,20 +36,23 @@ public class EntityNotFoundException extends RuntimeException {
     }
     
     /**
-     * Determina el sufijo de género para el mensaje en español.
-     * "CPU", "GPU", "PSU", "RAM", "Motherboard" son femeninas, "Case", "Storage" son masculinos.
+     * Sufijo de participio para el mensaje ({@code no encontrado/no encontrada}).
+     * <p>
+     * Femenino: CPU, GPU, PSU (acrónimo concordado en femenino en este proyecto), RAM, MOTHERBOARD.
+     * Masculino: CASE, STORAGE, PRE-BUILT (y texto equivalente sin guion).
      */
     private static String getGenderSuffix(String entityName) {
         if (entityName == null) {
             return "o";
         }
         String upper = entityName.toUpperCase();
-        // Entidades femeninas
-        if (upper.equals("CPU") || upper.equals("GPU") || upper.equals("PSU") || 
+        if (upper.equals("PRE-BUILT") || "PREBUILT".equals(upper.replace("-", ""))) {
+            return "o";
+        }
+        if (upper.equals("CPU") || upper.equals("GPU") || upper.equals("PSU") ||
             upper.equals("RAM") || upper.equals("MOTHERBOARD")) {
             return "a";
         }
-        // Entidades masculinas (Case, Storage)
         return "o";
     }
     

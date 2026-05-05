@@ -9,10 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Regla de advertencia: Validar que todas las RAMs tengan la misma frecuencia.
- * Mezclar frecuencias diferentes puede causar que todas funcionen a la frecuencia más baja,
- * limitando el rendimiento de los módulos más rápidos.
- * Esta es una regla de ADVERTENCIA (no bloqueante).
+ * Regla de advertencia: usar varias RAMs con frecuencias distintas (conviven pero la m?s baja limita al resto).
+ * No bloquea la build (WARNING).
  */
 public class RamFrequencyMismatchRule implements CompatibilityRule {
     
@@ -24,13 +22,13 @@ public class RamFrequencyMismatchRule implements CompatibilityRule {
             return RuleResult.valid(); // Necesita al menos 2 RAMs para comparar
         }
         
-        // Obtener todas las frecuencias únicas
+        // Obtener todas las frecuencias ?nicas
         Set<Integer> frequencies = rams.stream()
             .filter(ram -> ram.getFrequency() != null)
             .map(Ram::getFrequency)
             .collect(Collectors.toSet());
         
-        // Si hay más de una frecuencia, generar advertencia
+        // Si hay m?s de una frecuencia, generar advertencia
         if (frequencies.size() > 1) {
             String frequenciesList = frequencies.stream()
                 .map(f -> f + " MHz")
@@ -38,7 +36,7 @@ public class RamFrequencyMismatchRule implements CompatibilityRule {
             return RuleResult.warning(
                 WarningCode.RAM_FREQUENCY_MISMATCH,
                 String.format(
-                    "Se están usando RAMs con diferentes frecuencias (%s). Todas funcionarán a la frecuencia más baja, limitando el rendimiento de los módulos más rápidos. Se recomienda usar módulos con la misma frecuencia",
+                    "Se est?n usando RAMs con diferentes frecuencias (%s). Todas funcionar?n a la frecuencia m?s baja, limitando el rendimiento de los m?dulos m?s r?pidos. Se recomienda usar m?dulos con la misma frecuencia",
                     frequenciesList
                 ),
                 "ram"

@@ -26,7 +26,7 @@ public class BuildService {
     private final PsuService psuService;
     private final CaseService caseService;
     
-    // Lista de reglas de compatibilidad
+    /** Reglas de validación ejecutadas en orden (bloqueantes y de advertencia). */
     private final List<CompatibilityRule> rules;
     
     public BuildService(CpuService cpuService, 
@@ -43,10 +43,9 @@ public class BuildService {
         this.gpuService = gpuService;
         this.psuService = psuService;
         this.caseService = caseService;
-        
-        // Inicializar reglas de compatibilidad
+
         this.rules = new ArrayList<>();
-        // Reglas bloqueantes (ERROR)
+        // Bloqueantes (ERROR)
         this.rules.add(new CpuMotherRule());
         this.rules.add(new MotherRamRule());
         this.rules.add(new RamSlotsRule());
@@ -56,7 +55,7 @@ public class BuildService {
         this.rules.add(new CaseFormFactorRule());
         this.rules.add(new StorageCaseSlotsRule());
         this.rules.add(new StorageMotherboardM2Rule());
-        // Reglas de advertencia (WARNING)
+        // Advertencias (WARNING)
         this.rules.add(new RamRecommendationRule());
         this.rules.add(new RamFrequencyMinimumRule());
         this.rules.add(new CpuRamBalanceRule());

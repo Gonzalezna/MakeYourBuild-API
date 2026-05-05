@@ -8,8 +8,8 @@ import com.makeyourbuild.api.domain.model.Ram;
 import java.util.List;
 
 /**
- * Regla de compatibilidad: Validar frecuencia mínima recomendada de RAM según CPU.
- * Esta es una regla de ADVERTENCIA (no bloqueante, pero recomendada).
+ * Regla de advertencia: la frecuencia de algún módulo de RAM está por debajo de la mínima recomendada por la CPU.
+ * No bloquea la build (WARNING).
  */
 public class RamFrequencyMinimumRule implements CompatibilityRule {
     

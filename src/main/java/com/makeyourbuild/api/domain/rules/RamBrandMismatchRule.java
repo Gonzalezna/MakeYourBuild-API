@@ -9,9 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Regla de advertencia: Validar que todas las RAMs sean de la misma marca.
- * Mezclar marcas diferentes puede causar problemas de compatibilidad y estabilidad.
- * Esta es una regla de ADVERTENCIA (no bloqueante).
+ * Regla de advertencia: usar varias RAMs con marcas distintas.
+ * No bloquea la build (WARNING).
  */
 public class RamBrandMismatchRule implements CompatibilityRule {
     

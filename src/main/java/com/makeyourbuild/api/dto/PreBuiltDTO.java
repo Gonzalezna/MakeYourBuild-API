@@ -37,7 +37,7 @@ public class PreBuiltDTO {
         this.imageUrl = imageUrl;
     }
     
-    // Getters and Setters
+    // Getters y setters (campos simples y componentes anidados)
     public Long getId() {
         return id;
     }
@@ -86,7 +86,6 @@ public class PreBuiltDTO {
         this.imageUrl = imageUrl;
     }
     
-    // Getters and Setters para componentes completos
     public CpuDTO getCpu() {
         return cpu;
     }

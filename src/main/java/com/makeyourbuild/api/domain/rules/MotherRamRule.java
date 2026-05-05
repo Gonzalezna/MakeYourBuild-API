@@ -8,9 +8,12 @@ import com.makeyourbuild.api.domain.model.Ram;
 import java.util.List;
 
 /**
- * Reglas de compatibilidad entre Motherboard y RAM:
- * - Motherboard.ramType == RAM.type (BLOQUEANTE)
- * - RAM.frequency <= Motherboard.maxFrequency (BLOQUEANTE)
+ * Regla bloqueante: tipo y frecuencia de RAM compatibles con la motherboard.
+ * <ul>
+ *   <li>{@code Motherboard.ramType == RAM.type}</li>
+ *   <li>{@code RAM.frequency <= Motherboard.maxFrequency}</li>
+ * </ul>
+ * Si falla, la configuración no es válida (ERROR).
  */
 public class MotherRamRule implements CompatibilityRule {
     

@@ -4,19 +4,12 @@ API REST desarrollada en Java con Spring Boot para validación de compatibilidad
 
 ## Descripción
 
-MakeYourBuild API es un sistema backend robusto que valida la compatibilidad técnica entre componentes de hardware de PC (CPU, Motherboard, RAM, GPU, PSU, Storage, Case) y calcula presupuestos automáticamente. El sistema implementa un motor de reglas extensible con 17 reglas de compatibilidad que distinguen entre errores bloqueantes y advertencias, proporcionando una experiencia de usuario clara y precisa.
-
-El proyecto está diseñado siguiendo principios de Domain-Driven Design (DDD) y Clean Architecture, con un enfoque en la separación de responsabilidades, testabilidad y extensibilidad. Las reglas de negocio están completamente desacopladas del framework Spring Boot, lo que permite reutilización y testing independiente.
+MakeYourBuild API es un sistema backend robusto que valida la compatibilidad técnica entre componentes de hardware de PC (CPU, Motherboard, RAM, GPU, PSU, Storage, Case) y calcula presupuestos automáticamente. El sistema implementa un motor de reglas extensible con 17 reglas de compatibilidad que distinguen entre errores bloqueantes y advertencias.
 
 ## Objetivo del Proyecto
 
-El objetivo principal de este proyecto es demostrar habilidades en:
-
-- **Diseño de Arquitectura**: Implementación de arquitectura en capas con separación clara de responsabilidades
-- **Domain-Driven Design**: Aplicación de DDD para modelar reglas de negocio
-- **Principios SOLID**: Aplicación consistente de principios de diseño orientado a objetos
-- **API RESTful**: Diseño e implementación de APIs REST bien estructuradas
-- **Manejo de Errores**: Sistema de manejo de errores y validaciones
+Este proyecto tiene como finalidad servir como entorno de aprendizaje para aplicar conceptos de desarrollo, incluyendo diseño de APIs REST, manejo de bases de datos relacionales y el uso de frameworks como Spring Boot.
+El foco está en la correcta implementación, buenas prácticas y entendimiento de la arquitectura, más que en la construcción de un producto final complejo.
 
 ## Tecnologías y Stack
 
@@ -32,14 +25,6 @@ El objetivo principal de este proyecto es demostrar habilidades en:
 - **Supabase**: Plataforma de base de datos en la nube
 - **Hibernate/JPA**: ORM para mapeo objeto-relacional
 
-### Arquitectura y Patrones
-- **Domain-Driven Design (DDD)**: Diseño orientado al dominio
-- **REST API**: Arquitectura de servicios RESTful
-- **Layered Architecture**: Arquitectura en capas
-- **SOLID Principles**: Principios de diseño orientado a objetos
-- **Repository Pattern**: Patrón de repositorio para acceso a datos
-- **Strategy Pattern**: Patrón de estrategia para reglas de compatibilidad
-
 ## Funcionalidades Principales
 
 ### Motor de Reglas Extensible
@@ -49,26 +34,21 @@ El objetivo principal de este proyecto es demostrar habilidades en:
 - Códigos estructurados para identificación programática en el frontend
 
 ### Filtrado en Tiempo Real
-- Endpoints `/compatible` para filtrar componentes mientras el usuario construye la build
-- Validación incremental sin necesidad de validar toda la configuración
+- Endpoints `/compatible` para filtrar componentes mientras el usuario construye la build utlizando una validacion incremental
 - Mejora de la experiencia de usuario al mostrar solo opciones válidas
 
 ### Cálculo Automático de Presupuestos
 - Cálculo en tiempo real del precio total de la configuración
-- Soporte para múltiples módulos de RAM y unidades de almacenamiento
-- Precisión con `BigDecimal` para cálculos monetarios
 
 ### Builds Predefinidos (Pre-Built)
 - Catálogo de builds predefinidos organizados por categoría
 - Categorías disponibles: Gaming, Workstation, Graphic design, Streaming, Personal/Home
 - Cada build incluye **componentes completos** (no solo IDs) y precio total calculado
 - Los componentes se devuelven como objetos completos (CpuDTO, MotherboardDTO, RamDTO, etc.) para facilitar el uso en el frontend
-- Búsqueda inteligente por presupuesto: retorna 3 builds (por debajo, justo, por encima del presupuesto)
+- Búsqueda inteligente por presupuesto: retorna 3 builds entorno al presupuesto indicado.
 - Expansión automática de rangos si no hay suficientes builds en el rango inicial
-- Validación de compatibilidad para builds predefinidos
-- Conversión automática de builds predefinidos a BuildRequestDTO para validación
 
-### Validación de Compatibilidad
+### Validaciónes de Compatibilidad
 - Validación de socket CPU-Motherboard
 - Validación de chipset y generación de CPU //Es posible que el socket CPU-Motherboard sea compatible, pero el chipset no soporte generaciones de CPU muy antiguas
 - Validación de tipo y frecuencia de RAM
@@ -85,13 +65,6 @@ El objetivo principal de este proyecto es demostrar habilidades en:
 
 
 ## Desafíos Técnicos y Aprendizajes
-  
-  - **Uso crítico de herramientas de IA**  
-  Durante el desarrollo utilicé herramientas de IA como acelerador de productividad.
-  Sin embargo, fue necesario revisar y refactorizar código generado automáticamente,
-  donde se detectaron violaciones a principios SOLID y DRY.
-  Estas refactorizaciones permitieron mejorar la mantenibilidad, reducir duplicación
-  y desacoplar la lógica de negocio.
 
 - **Diseño de reglas de compatibilidad**  
   Más que un problema puntual, el desafío fue investigar y definir cómo
@@ -103,6 +76,7 @@ El objetivo principal de este proyecto es demostrar habilidades en:
   Aprendí la importancia de diseñar el flujo completo del programa antes de
   implementar, especialmente en un backend orientado a reglas, evitando soluciones
   acopladas o difíciles de extender.
+
 
 # Ejemplos concretos de problemas/barreras encontrados.
 
@@ -134,7 +108,7 @@ El objetivo principal de este proyecto es demostrar habilidades en:
 
 ## Arquitectura
 
-El proyecto sigue una arquitectura en capas con separación clara de responsabilidades, siguiendo principios de Domain-Driven Design (DDD) y Clean Architecture.
+El proyecto sigue una arquitectura en capas con separación clara de responsabilidades, siguiendo principios de Domain-Driven Design (DDD).
 
 ```
 ┌─────────────────────────────────────────┐
@@ -372,44 +346,3 @@ backend/
 
 **exception/**: Excepciones personalizadas (EntityNotFoundException, BusinessException) y manejador global de excepciones.
 
-## Roadmap / Mejoras Futuras
-
-### Corto Plazo
-- Implementar tests unitarios para reglas de compatibilidad
-- Agregar tests de integración para endpoints principales
-- Implementar paginación en endpoints de listado
-- Agregar filtros y búsqueda en endpoints de componentes
-- Listado de componentes disponibles en la web
-
-### Mediano Plazo
-- Implementar autenticación JWT para endpoints de administración
-- Implementar el login de usuarios
-- Agregar endpoints para CRUD de componentes (actualmente solo lectura)
-- Implementar caché para mejorar performance en consultas frecuentes
-- Agregar documentación OpenAPI/Swagger
-
-### Largo Plazo
-- Implementar sistema de puntuacion de builds, segun precio/potencia/balance de componentes
-- Implementar listado de builds mas populares
-
-## Estado del Proyecto
-
-**Estado Actual**: MVP Completo
-
-El proyecto está en un estado funcional completo con todas las funcionalidades principales implementadas:
-
--  Motor de reglas con 17 reglas de compatibilidad
--  Endpoints RESTful para todos los componentes
--  Endpoints de compatibilidad en tiempo real
--  Validación completa de builds
--  Cálculo automático de presupuestos
--  Sistema de errores y advertencias estructurado
--  Manejo de errores robusto
--  Configuración de seguridad implementada
--  Funcionalidad Pre-Built implementada (builds predefinidos por categoría)
--  Documentación completa
-
-**Próximos Pasos**: 
-- Implementar suite de tests
-- Agregar documentación OpenAPI/Swagger
-- Optimizaciones de performance

@@ -11,12 +11,16 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 /**
  * Configuración de seguridad para la API REST.
- * 
- * Esta configuración:
- * - Desactiva CSRF (no necesario para APIs REST stateless)
- * - Permite acceso a los endpoints de la API
- * - Configura CORS
- * - Usa sesiones stateless (JWT recomendado para producción)
+ * <p>
+ * Comportamiento actual:
+ * <ul>
+ *   <li>CSRF desactivado (API sin formularios de navegador tradicionales)</li>
+ *   <li>CORS según {@link CorsConfigurationSource} inyectado</li>
+ *   <li>Rutas bajo {@code /api/**} con acceso público (MVP)</li>
+ *   <li>Salud y OpenAPI/Swagger también públicos</li>
+ *   <li>Sin sesión de servidor: {@link SessionCreationPolicy#STATELESS}</li>
+ *   <li>Cualquier otra ruta (fuera de los patrones anteriores) exige usuario autenticado</li>
+ * </ul>
  */
 @Configuration
 @EnableWebSecurity
@@ -31,25 +35,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // Desactivar CSRF para APIs REST (stateless)
             .csrf(AbstractHttpConfigurer::disable)
-            
-            // Configurar CORS
             .cors(cors -> cors.configurationSource(corsConfigurationSource))
-            
-            // Configurar autorización de endpoints
             .authorizeHttpRequests(auth -> auth
-                // Permitir acceso público a endpoints de salud y documentación
                 .requestMatchers("/api/health", "/api/docs/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                // MVP: Permitir acceso público a todos los endpoints de la API (sin autenticación)
                 .requestMatchers("/api/**").permitAll()
-                // Permitir acceso a recursos estáticos (si los hay)
                 .requestMatchers("/static/**", "/templates/**").permitAll()
-                // Cualquier otra petición requiere autenticación (para futuras funcionalidades)
                 .anyRequest().authenticated()
             )
-            
-            // Configurar sesiones como stateless (para JWT)
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             );

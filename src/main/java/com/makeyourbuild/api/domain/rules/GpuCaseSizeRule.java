@@ -6,8 +6,8 @@ import com.makeyourbuild.api.domain.model.Case;
 import com.makeyourbuild.api.domain.model.Gpu;
 
 /**
- * Regla de compatibilidad: GPU length debe caber en el Case.
- * Esta es una regla BLOQUEANTE (ERROR).
+ * Regla bloqueante: la longitud de la GPU no puede superar el máximo admitido por el gabinete.
+ * Si falla, la configuración no es válida (ERROR).
  */
 public class GpuCaseSizeRule implements CompatibilityRule {
     

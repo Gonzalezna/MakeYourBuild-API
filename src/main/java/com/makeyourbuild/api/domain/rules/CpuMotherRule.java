@@ -6,8 +6,8 @@ import com.makeyourbuild.api.domain.model.Cpu;
 import com.makeyourbuild.api.domain.model.Motherboard;
 
 /**
- * Regla de compatibilidad: CPU.socket == Motherboard.socket
- * Esta es una regla BLOQUEANTE (ERROR).
+ * Regla bloqueante: el socket de la CPU debe coincidir con el de la motherboard.
+ * Si falla, la configuración no es válida (ERROR).
  */
 public class CpuMotherRule implements CompatibilityRule {
     

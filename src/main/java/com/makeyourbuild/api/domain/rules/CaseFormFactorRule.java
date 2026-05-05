@@ -8,9 +8,9 @@ import com.makeyourbuild.api.domain.model.Motherboard;
 import com.makeyourbuild.api.domain.util.FormFactorUtils;
 
 /**
- * Regla de compatibilidad: Case debe soportar el form factor de la motherboard.
- * Un Case ATX puede soportar mATX e ITX, pero un Case mATX no puede soportar ATX.
- * Esta es una regla BLOQUEANTE (ERROR).
+ * Regla bloqueante: el gabinete debe poder alojar el form factor de la motherboard.
+ * Un case más grande puede alojar placas más pequeñas; al revés, no.
+ * Si falla, la configuración no es válida (ERROR).
  */
 public class CaseFormFactorRule implements CompatibilityRule {
     

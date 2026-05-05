@@ -9,9 +9,9 @@ import com.makeyourbuild.api.domain.model.Storage;
 import java.util.List;
 
 /**
- * Regla de compatibilidad: Storage SATA (SSD 2.5" y HDD 3.5") debe caber en los slots disponibles del Case.
- * Nota: Los NVMe M.2 se validan contra la motherboard, no contra el case.
- * Esta es una regla BLOQUEANTE (ERROR).
+ * Regla bloqueante: las unidades 2.5" y 3.5" no pueden superar las bahías del gabinete.
+ * Los NVMe M.2 se validan contra la motherboard, no contra el case.
+ * Si falla, la configuración no es válida (ERROR).
  */
 public class StorageCaseSlotsRule implements CompatibilityRule {
     
